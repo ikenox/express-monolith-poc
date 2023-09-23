@@ -4,8 +4,8 @@ import { createServer as apolloServer } from './apollo-server/server'
 import { ApolloGateway, IntrospectAndCompose } from '@apollo/gateway'
 import cors from 'cors'
 import { json } from 'body-parser'
-import { expressMiddleware } from '@apollo/server/dist/esm/express4'
 import { ApolloServer } from '@apollo/server'
+import { expressMiddleware } from '@apollo/server/express4'
 
 require('dotenv').config()
 
@@ -20,8 +20,8 @@ const start = async () => {
   const gateway = new ApolloGateway({
     supergraphSdl: new IntrospectAndCompose({
       subgraphs: [
-        { name: 'payload', url: 'http://localhost:3001' },
-        { name: 'apollo', url: 'http://localhost:3002' },
+        { name: 'payload', url: 'http://localhost:3001/api/graphql' },
+        { name: 'apollo', url: 'http://localhost:3002/api/graphql' },
       ],
     }),
   })
