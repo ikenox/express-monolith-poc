@@ -55,7 +55,8 @@ export const schema = makeExecutableSchema({
 
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.
-export async function createServer() {
+export async function createApp() {
   const app = express()
+  app.get('/hello', (req, res) => res.send('hello'))
   return app
 }

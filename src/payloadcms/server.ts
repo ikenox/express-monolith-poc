@@ -3,7 +3,7 @@ import { UrlLoader } from '@graphql-tools/url-loader'
 import express from 'express'
 import payload from 'payload'
 
-export async function createServer() {
+export async function createApp() {
   const app = express()
   await payload.init({
     secret: process.env.PAYLOAD_SECRET,
