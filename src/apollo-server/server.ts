@@ -1,4 +1,6 @@
 import { ApolloServer } from '@apollo/server'
+
+import { makeExecutableSchema, mergeSchemas } from '@graphql-tools/schema'
 import gql from 'graphql-tag'
 
 import { expressMiddleware } from '@apollo/server/express4'
@@ -45,6 +47,11 @@ const resolvers = {
     books: () => books,
   },
 }
+
+export const schema = makeExecutableSchema({
+  typeDefs,
+  resolvers,
+})
 
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.

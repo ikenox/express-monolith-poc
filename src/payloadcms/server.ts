@@ -3,7 +3,7 @@ import payload from 'payload'
 
 export async function createServer() {
   const payloadApp = express()
-  await payload.init({
+  const instance = await payload.init({
     secret: process.env.PAYLOAD_SECRET,
     mongoURL: process.env.MONGODB_URI,
     express: payloadApp,
@@ -11,5 +11,6 @@ export async function createServer() {
       payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
     },
   })
-  return payloadApp
+
+  return { app: payloadApp, schema: instance.schema }
 }
