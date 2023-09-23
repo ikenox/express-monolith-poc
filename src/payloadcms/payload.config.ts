@@ -1,8 +1,9 @@
-import { buildConfig } from 'payload/config'
-import path from 'path'
-import Users from './collections/Users'
-import { payloadCloud } from '@payloadcms/plugin-cloud'
-import { Hello } from './components/Hello'
+import { buildConfig } from 'payload/config';
+import path from 'path';
+import Users from './collections/Users';
+import { payloadCloud } from '@payloadcms/plugin-cloud';
+import { Hello } from './components/Hello';
+import Articles from './collections/Articles';
 
 export default buildConfig({
   routes: {
@@ -15,23 +16,7 @@ export default buildConfig({
     },
     user: Users.slug,
   },
-  collections: [
-    Users,
-    {
-      slug: 'articles',
-      access: { read: () => true },
-      fields: [
-        {
-          name: 'title',
-          type: 'text',
-        },
-        {
-          name: 'body',
-          type: 'text',
-        },
-      ],
-    },
-  ],
+  collections: [Users, Articles],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
@@ -39,4 +24,4 @@ export default buildConfig({
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
   plugins: [payloadCloud()],
-})
+});
