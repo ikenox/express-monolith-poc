@@ -1,22 +1,18 @@
-import express from 'express';
-import payload from 'payload';
+import express from 'express'
+import { createServer as payloadServer } from './payloadcms/server'
+import { createServer as apolloServer } from './apollo-server/server'
 
-require('dotenv').config();
+require('dotenv').config()
 
 const start = async () => {
-  const defaultApp = express();
-  defaultApp.listen(3000);
+  const app = express()
 
-  const payloadApp = express();
-  await payload.init({
-    secret: process.env.PAYLOAD_SECRET,
-    mongoURL: process.env.MONGODB_URI,
-    express: payloadApp,
-    onInit: async () => {
-      payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`);
-    },
-  });
-  payloadApp.listen(3001);
-};
+  const payload = await payloadServer()
+  payload.listen(3001)
+  const apollo = await apolloServer()
+  apollo.listen(3002)
 
-start();
+  app.listen(3000)
+}
+
+start()

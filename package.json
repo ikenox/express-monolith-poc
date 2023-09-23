@@ -5,20 +5,24 @@
   "main": "dist/server.js",
   "license": "MIT",
   "scripts": {
-    "dev": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts nodemon",
-    "build:payload": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload build",
+    "dev": "cross-env PAYLOAD_CONFIG_PATH=src/payloadcms/payload.config.ts nodemon",
+    "build:payload": "cross-env PAYLOAD_CONFIG_PATH=src/payloadcms/payload.config.ts payload build",
     "build:server": "tsc",
-    "build": "yarn copyfiles && yarn build:payload && yarn build:server",
-    "serve": "cross-env PAYLOAD_CONFIG_PATH=dist/payload.config.js NODE_ENV=production node dist/server.js",
+    "build": "pnpm copyfiles && pnpm build:payload && pnpm build:server",
+    "serve": "cross-env PAYLOAD_CONFIG_PATH=dist/payloadcms/payload.config.js NODE_ENV=production node dist/server.js",
     "copyfiles": "copyfiles -u 1 \"src/**/*.{html,css,scss,ttf,woff,woff2,eot,svg,jpg,png}\" dist/",
-    "generate:types": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload generate:types",
-    "generate:graphQLSchema": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload generate:graphQLSchema"
+    "generate:types": "cross-env PAYLOAD_CONFIG_PATH=src/payloadcms/payload.config.ts payload generate:types",
+    "generate:graphQLSchema": "cross-env PAYLOAD_CONFIG_PATH=src/payloadcms/payload.config.ts payload generate:graphQLSchema"
   },
   "dependencies": {
+    "@apollo/server": "^4.9.3",
     "@payloadcms/plugin-cloud": "^0.0.10",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "graphql": "^16.8.1",
     "payload": "latest"
   },
   "devDependencies": {
