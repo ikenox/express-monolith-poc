@@ -13,11 +13,22 @@ import { buildSubgraphSchema } from '@apollo/subgraph'
 // that together define the "shape" of queries that are executed against
 // your data.
 const typeDefs = gql`
+  enum CacheControlScope {
+    PUBLIC
+    PRIVATE
+  }
+
+  directive @cacheControl(
+    maxAge: Int
+    scope: CacheControlScope
+    inheritMaxAge: Boolean
+  ) on FIELD_DEFINITION | OBJECT | INTERFACE | UNION
+
   # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
 
   # This "Book" type defines the queryable fields for every book in our data source.
   type Book {
-    title: String
+    title: String @cacheControl(maxAge: 30)
     author: String
   }
 
