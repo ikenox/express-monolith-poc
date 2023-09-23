@@ -29,6 +29,7 @@ const start = async () => {
   app.use(payloadApp)
   app.use(server1App)
   app.listen(3000)
+  console.log('start listening port 3000')
 }
 
 start()

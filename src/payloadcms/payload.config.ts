@@ -10,6 +10,9 @@ export default buildConfig({
     admin: '/payload/admin',
   },
   admin: {
+    components: {
+      Nav: Hello,
+    },
     user: Users.slug,
   },
   collections: [
