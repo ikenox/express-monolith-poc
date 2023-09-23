@@ -4,19 +4,19 @@ import express from 'express'
 import payload from 'payload'
 
 export async function createServer() {
-  const payloadApp = express()
+  const app = express()
   await payload.init({
     secret: process.env.PAYLOAD_SECRET,
     mongoURL: process.env.MONGODB_URI,
-    express: payloadApp,
+    express: app,
     onInit: async () => {
       payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
     },
   })
-  payloadApp.listen(4000)
+  app.listen(4000)
   const schema = await loadSchema('http://localhost:4000/api/graphql', {
     loaders: [new UrlLoader()],
   })
 
-  return { app: payloadApp, schema }
+  return { app, schema }
 }
