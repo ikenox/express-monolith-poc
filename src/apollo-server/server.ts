@@ -57,17 +57,5 @@ export const schema = makeExecutableSchema({
 // definition and your set of resolvers.
 export async function createServer() {
   const app = express()
-
-  const server = new ApolloServer({
-    schema: buildSubgraphSchema([
-      {
-        typeDefs,
-        resolvers,
-      },
-    ]),
-  })
-  await server.start()
-
-  app.use('/api/graphql', cors<cors.CorsRequest>(), json(), expressMiddleware(server))
   return app
 }

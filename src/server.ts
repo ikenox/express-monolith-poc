@@ -18,14 +18,6 @@ const start = async () => {
   const apollo = await apolloServer()
   apollo.listen(3002)
 
-  // const gateway = new ApolloGateway({
-  //   supergraphSdl: new IntrospectAndCompose({
-  //     subgraphs: [
-  //       { name: 'apollo', url: 'http://localhost:3002/api/graphql' },
-  //       // { name: 'payload', url: 'http://localhost:3001/api/graphql' },
-  //     ],
-  //   }),
-  // })
   const server = new ApolloServer({
     schema: mergeSchemas({ schemas: [schema, apolloSchema] }),
   })
