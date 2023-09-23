@@ -1,13 +1,16 @@
 import { ApolloServer } from '@apollo/server'
+import gql from 'graphql-tag'
+
 import { expressMiddleware } from '@apollo/server/express4'
 import cors from 'cors'
 import { json } from 'body-parser'
 import express from 'express'
+import { buildSubgraphSchema } from '@apollo/subgraph'
 
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
 // your data.
-const typeDefs = `#graphql
+const typeDefs = gql`
   # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
 
   # This "Book" type defines the queryable fields for every book in our data source.
@@ -49,9 +52,12 @@ export async function createServer() {
   const app = express()
 
   const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    introspection: true,
+    schema: buildSubgraphSchema([
+      {
+        typeDefs,
+        resolvers,
+      },
+    ]),
   })
   await server.start()
 
