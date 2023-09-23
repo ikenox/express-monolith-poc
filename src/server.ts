@@ -18,7 +18,6 @@ const start = async () => {
 
   const { app: payloadApp, schema: payloadSchema } = await payloadServer();
   const server1App = await server1();
-  http.createServer();
   const schema = stitchSchemas({ subschemas: [payloadSchema, apolloSchema] });
   const server = new ApolloServer({
     schema,
