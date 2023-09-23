@@ -2,6 +2,7 @@ import { buildConfig } from 'payload/config'
 import path from 'path'
 import Users from './collections/Users'
 import { payloadCloud } from '@payloadcms/plugin-cloud'
+import { Hello } from './components/Hello'
 
 export default buildConfig({
   routes: {
