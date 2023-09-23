@@ -11,10 +11,11 @@ export async function createApp() {
     express: app,
     onInit: async () => {
       payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
+      payload.logger.info(`Payload Admin URL: ${payload.getAPIURL()}`)
     },
   })
   app.listen(4000)
-  const schema = await loadSchema('http://localhost:4000/api/graphql', {
+  const schema = await loadSchema('http://localhost:4000/payload/api/graphql', {
     loaders: [new UrlLoader()],
   })
 

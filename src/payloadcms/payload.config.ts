@@ -4,6 +4,10 @@ import Users from './collections/Users'
 import { payloadCloud } from '@payloadcms/plugin-cloud'
 
 export default buildConfig({
+  routes: {
+    api: '/payload/api',
+    admin: '/payload/admin',
+  },
   admin: {
     user: Users.slug,
   },
