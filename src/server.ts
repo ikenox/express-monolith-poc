@@ -22,8 +22,8 @@ const start = async () => {
   })
   await server.start()
   app.use('/api/graphql', cors<cors.CorsRequest>(), json(), expressMiddleware(server))
-  app.use('/payload', payloadApp)
-  app.use('/', server1App)
+  app.use(payloadApp)
+  app.use(server1App)
   app.listen(3000)
 }
 
