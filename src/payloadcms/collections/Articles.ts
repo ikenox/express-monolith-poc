@@ -14,6 +14,10 @@ const Articles: CollectionConfig = {
       name: 'body',
       type: 'text',
     },
+    {
+      name: 'bodyHtml',
+      type: 'richText',
+    },
   ],
 };
 
